@@ -1,0 +1,324 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background: #000000;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    color: white;
+    -webkit-tap-highlight-color: transparent;
+    perspective: 1200px;
+}
+
+#escena-3d {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+    pointer-events: none;
+}
+
+#espacio-amor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform-style: preserve-3d;
+    animation: moverEspacio 30s infinite linear;
+}
+
+@keyframes moverEspacio {
+    0% {
+        transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    25% {
+        transform: translate(-50%, -50%) rotateX(5deg) rotateY(10deg) rotateZ(2deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotateX(-3deg) rotateY(-8deg) rotateZ(-2deg);
+    }
+    75% {
+        transform: translate(-50%, -50%) rotateX(8deg) rotateY(-5deg) rotateZ(3deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+}
+
+/* Elemento 3D flotante */
+.elemento-3d {
+    position: absolute;
+    transform-style: preserve-3d;
+    pointer-events: none;
+    will-change: transform;
+    backface-visibility: hidden;
+    transition: transform 0.1s;
+}
+
+/* Frase 3D */
+.frase-3d {
+    color: #ffd700;
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.9),
+        0 0 60px rgba(255, 215, 0, 0.6),
+        0 0 100px rgba(255, 215, 0, 0.4),
+        0 0 150px rgba(255, 215, 0, 0.2);
+    padding: 10px 20px;
+    background: transparent;
+    border: none;
+    font-style: italic;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    white-space: nowrap;
+    transform: rotate(var(--rotacion-x, 0deg)) rotateY(var(--rotacion-y, 0deg));
+    text-shadow: 
+        0 0 40px rgba(255, 215, 0, 0.8),
+        0 0 80px rgba(255, 215, 0, 0.5),
+        0 0 120px rgba(255, 215, 0, 0.3);
+}
+
+/* Foto 3D */
+.foto-3d {
+    border-radius: 20px;
+    box-shadow: 
+        0 0 50px rgba(255, 215, 0, 0.4),
+        0 0 100px rgba(255, 215, 0, 0.2),
+        0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    max-width: 220px;
+    max-height: 220px;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    background: transparent;
+    padding: 0;
+    transform: rotate(var(--rotacion-x, 0deg)) rotateY(var(--rotacion-y, 0deg));
+    transition: transform 0.3s ease;
+}
+
+/* Efecto de profundidad 3D en fotos */
+.foto-3d::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    background: linear-gradient(45deg, 
+        rgba(255, 215, 0, 0.1),
+        transparent 50%,
+        rgba(255, 215, 0, 0.05)
+    );
+    pointer-events: none;
+}
+
+/* Estrellas 3D */
+.estrella-3d {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.3);
+    animation: parpadear3d 2s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+}
+
+@keyframes parpadear3d {
+    0% { 
+        opacity: 0.2; 
+        transform: scale(0.8) translateZ(0px); 
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1.2) translateZ(20px); 
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+    }
+}
+
+/* Corazones 3D flotando */
+.corazon-3d {
+    position: absolute;
+    color: rgba(255, 215, 0, 0.08);
+    font-size: 40px;
+    animation: flotar3d 20s ease-in-out infinite;
+    will-change: transform;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+    transform-style: preserve-3d;
+}
+
+@keyframes flotar3d {
+    0% {
+        transform: translate(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        opacity: 0.3;
+    }
+    25% {
+        transform: translate(30px, -40px, 50px) rotateX(10deg) rotateY(20deg) rotateZ(5deg);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translate(-20px, 30px, -30px) rotateX(-5deg) rotateY(-15deg) rotateZ(-5deg);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translate(40px, -20px, 60px) rotateX(15deg) rotateY(-10deg) rotateZ(8deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        opacity: 0.3;
+    }
+}
+
+/* Frases de fondo en 3D */
+.frase-fondo-3d {
+    position: absolute;
+    color: rgba(255, 215, 0, 0.04);
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 0 0 50px rgba(255, 215, 0, 0.02);
+    white-space: nowrap;
+    letter-spacing: 3px;
+    animation: flotarFrase3d 25s ease-in-out infinite alternate;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+@keyframes flotarFrase3d {
+    0% {
+        transform: translate(0, 0, 0) rotateX(0deg) rotateY(0deg);
+        opacity: 0.3;
+    }
+    33% {
+        transform: translate(25px, -30px, 40px) rotateX(5deg) rotateY(10deg);
+        opacity: 0.6;
+    }
+    66% {
+        transform: translate(-15px, 20px, -20px) rotateX(-3deg) rotateY(-8deg);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(10px, -10px, 30px) rotateX(2deg) rotateY(5deg);
+        opacity: 0.5;
+    }
+}
+
+/* Partícula de lluvia 3D */
+.particula-lluvia-3d {
+    position: absolute;
+    animation: caerLluvia3d linear forwards;
+    pointer-events: none;
+    opacity: 0;
+    transform-style: preserve-3d;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+@keyframes caerLluvia3d {
+    0% {
+        transform: translateY(0) translateZ(-100px) rotateX(0deg) rotateY(0deg) scale(0.3);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(20vh) translateZ(0px) rotateX(5deg) rotateY(10deg) scale(1);
+    }
+    50% {
+        transform: translateY(50vh) translateZ(50px) rotateX(-3deg) rotateY(-8deg) scale(1.1);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(80vh) translateZ(-30px) rotateX(8deg) rotateY(5deg) scale(1);
+    }
+    100% {
+        transform: translateY(110vh) translateZ(-100px) rotateX(-5deg) rotateY(-10deg) scale(0.7);
+        opacity: 0;
+    }
+}
+
+/* Efecto de zoom 3D */
+body.zoom-in .elemento-3d {
+    transform: scale(1.3) translateZ(100px) !important;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.zoom-in .foto-3d {
+    transform: scale(1.2) rotateY(10deg) !important;
+    box-shadow: 
+        0 0 80px rgba(255, 215, 0, 0.6),
+        0 0 150px rgba(255, 215, 0, 0.3),
+        0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+body.zoom-in .frase-3d {
+    font-size: 2.5em;
+    text-shadow: 
+        0 0 60px rgba(255, 215, 0, 1),
+        0 0 120px rgba(255, 215, 0, 0.8),
+        0 0 200px rgba(255, 215, 0, 0.5);
+}
+
+body.zoom-in .particula-lluvia-3d {
+    transform: scale(1.4) translateZ(80px) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .frase-3d {
+        font-size: 1.3em;
+        white-space: normal;
+        max-width: 200px;
+    }
+    
+    .foto-3d {
+        max-width: 150px;
+        max-height: 150px;
+    }
+    
+    .frase-fondo-3d {
+        font-size: 1.2em;
+    }
+    
+    body.zoom-in .frase-3d {
+        font-size: 1.8em;
+    }
+    
+    body.zoom-in .elemento-3d {
+        transform: scale(1.4) translateZ(80px) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .frase-3d {
+        font-size: 1em;
+        max-width: 150px;
+    }
+    
+    .foto-3d {
+        max-width: 120px;
+        max-height: 120px;
+    }
+    
+    .frase-fondo-3d {
+        font-size: 0.9em;
+    }
+    
+    body.zoom-in .elemento-3d {
+        transform: scale(1.5) translateZ(60px) !important;
+    }
+}
